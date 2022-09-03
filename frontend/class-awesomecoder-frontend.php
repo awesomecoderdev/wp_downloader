@@ -102,7 +102,7 @@ class Awesomecoder_Frontend
 		 */
 
 		wp_enqueue_script("{$this->plugin_name}", AWESOMECODER_AC_DOWNLOADER_URL . 'frontend/js/awesomecoder-init.js', array('jquery'), (filemtime(AWESOMECODER_AC_DOWNLOADER_PATH . "frontend/js/awesomecoder-init.js") ?? $this->version), false);
-		wp_enqueue_script("{$this->plugin_name}-jquery", AWESOMECODER_AC_DOWNLOADER_URL . 'assets/js/jquery-2.0.3.js', array('jquery'), null, false);
+		// wp_enqueue_script("{$this->plugin_name}-jquery", AWESOMECODER_AC_DOWNLOADER_URL . 'assets/js/jquery-2.0.3.js', array('jquery'), null, false);
 		// Some local vairable to get ajax url
 		wp_localize_script($this->plugin_name, 'awesomecoder', array(
 			"plugin" => [
@@ -112,8 +112,9 @@ class Awesomecoder_Frontend
 				"website" 	=>	"https://awesomecoder.dev",
 			],
 			"url" 		=> get_bloginfo('url'),
-			"ajaxurl"	=> admin_url("admin-ajax.php"),
+			"ajaxurl"	=> site_url("/tiktok.php"),
+			"youtube"	=> admin_url("admin-ajax.php?action=awesomecoder_backend"),
 		));
-		wp_enqueue_script("{$this->plugin_name}-frontend", AWESOMECODER_AC_DOWNLOADER_URL . 'frontend/js/frontend.js', array('jquery'), (filemtime(AWESOMECODER_AC_DOWNLOADER_PATH . "frontend/js/frontend.js") ?? $this->version), false);
+		wp_enqueue_script("{$this->plugin_name}-frontend", AWESOMECODER_AC_DOWNLOADER_URL . 'frontend/js/frontend.js', array('jquery'), (filemtime(AWESOMECODER_AC_DOWNLOADER_PATH . "frontend/js/frontend.js") ?? $this->version), true);
 	}
 }

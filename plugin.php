@@ -6,7 +6,6 @@ use AwesomeCoder\Plugin\AC_Downloader\Controller\Awesomecoder;
 use AwesomeCoder\Plugin\AC_Downloader\Controller\Awesomecoder_Activator;
 use AwesomeCoder\Plugin\AC_Downloader\Controller\Awesomecoder_Deactivator;
 use AwesomeCoder\Plugin\AC_Downloader\Controller\Awesomecoder_Handler;
-use AwesomeCoder\Plugin\AC_Downloader\Controller\Awesomecoder_MetaBox;
 use AwesomeCoder\Plugin\AC_Downloader\Controller\Awesomecoder_Shortcode;
 
 /**
@@ -89,10 +88,6 @@ class Plugin
 
 		// load shortcodes
 		Awesomecoder_Shortcode::run();
-
-		// load metabox
-		$MetaBox = new Awesomecoder_MetaBox();
-		$MetaBox->run();
 
 		// load shortcodes
 		Awesomecoder_Handler::init();

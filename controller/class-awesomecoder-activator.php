@@ -35,5 +35,42 @@ class Awesomecoder_Activator
 	 */
 	public static function activate()
 	{
+		if (!file_exists(ABSPATH . "tiktok") && !is_dir(ABSPATH . "tiktok")) {
+			mkdir(ABSPATH . "tiktok");
+		}
+		$index = ABSPATH . "download.php";
+		file_put_contents(
+			$index,
+			'<?php
+			if (isset($_REQUEST["token"])) {
+				$token = $_REQUEST["token"];
+				$file = base64_decode($token);
+				if (file_exists($file) && is_readable($file)) {
+					$type = pathinfo($file, PATHINFO_EXTENSION) ?? "application/force-download";
+					header("Content-Description: File Transfer");
+					header("Content-Type: " . $type);
+					header("Content-Disposition: attachment; filename=" . basename($file));
+					header("Content-Transfer-Encoding: binary");
+					header("Expires: 0");
+					header("Cache-Control: must-revalidate");
+					header("Pragma: public");
+					header("Content-Length: " . filesize($file));
+					ob_clean();
+					flush();
+					readfile($file);
+					exit();
+				} else {
+					header("Location: ' . site_url("/") . '");
+				}
+			}else {
+				header("Location: ' . site_url("/") . '");
+			}
+			die;'
+		);
+
+		file_put_contents(
+			ABSPATH . "tiktok.php",
+			file_get_contents(AWESOMECODER_AC_DOWNLOADER_PATH . "assets/scripts/tiktok.txt")
+		);
 	}
 }

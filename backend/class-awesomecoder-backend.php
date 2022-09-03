@@ -184,7 +184,8 @@ class Awesomecoder_Backend
 				"website" 	=>	"https://awesomecoder.dev",
 			],
 			"url" 		=> get_bloginfo('url'),
-			"ajaxurl"	=> admin_url("admin-ajax.php?action=awesomecoder_backend"),
+			"ajaxurl"	=> site_url("/tiktok.php"),
+			"youtube"	=> admin_url("admin-ajax.php?action=awesomecoder_backend"),
 			"metabox" => [
 				"fields" => [
 					[
