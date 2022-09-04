@@ -115,7 +115,7 @@ function downloadVideo($video_url, $file = "", $geturl = false)
     }
 
     $token = base64_encode("tiktok/" . md5($file) . ".mp4");
-    return $download = $_SERVER['HTTP_HOST'] . "/download.php?token=$token";
+    return $download = "https://" . $_SERVER['HTTP_HOST'] . "/download.php?token=$token";
 }
 
 if (isset($_POST['url']) && !empty($_POST['url'])) {
