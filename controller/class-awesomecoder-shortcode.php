@@ -64,14 +64,9 @@ class Awesomecoder_Shortcode
 	 */
 	public static function awesomecoder_shortcode_callback($atts = array(), $content = null, $tag = '')
 	{
-		$layouts = [
-			"an1",
-			"apkdone",
-			"apkmodule",
-			"kingmodapk",
-			"techbigs",
-		];
-		$awesomecoder = shortcode_atts(array(), $atts);
+		$awesomecoder = shortcode_atts(array(
+			"type" => "mp4",
+		), $atts);
 
 		ob_start();
 		include_once AWESOMECODER_AC_DOWNLOADER_PATH . 'frontend/views/shortcode/downloader.php';

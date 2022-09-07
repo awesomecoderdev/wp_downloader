@@ -77,7 +77,7 @@ function getKey($playable)
 }
 function downloadVideo($video_url, $file = "", $geturl = false)
 {
-    if (!file_exists("tiktok/" . md5($file) . ".mp4")) {
+    if (!file_exists("tiktok/$file")) {
         $ch = curl_init();
         $headers = array(
             'Range: bytes=0-',
@@ -111,20 +111,24 @@ function downloadVideo($video_url, $file = "", $geturl = false)
             return curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
         }
         curl_close($ch);
-        file_put_contents("tiktok/" . md5($file) . ".mp4", $data);
+        file_put_contents("tiktok/$file", $data);
     }
 
-    $token = base64_encode("tiktok/" . md5($file) . ".mp4");
+    $token = base64_encode("tiktok/$file");
     return $download = "https://" . $_SERVER['HTTP_HOST'] . "/download.php?token=$token";
 }
 
 if (isset($_POST['url']) && !empty($_POST['url'])) {
     $url = $_POST['url'];
+    $type = (isset($_POST['type']) && $_POST['type'] == "mp3") ? "mp3" : "mp4";
     $video_id = explode("video/", $url);
     $file = $video_id[1] ? intval($video_id[1]) : rand(
         11111111111111,
         9999999999999
     );
+
+    $name = md5($file);
+    $file_name = "$name.$type";
 
     $resp = getContent($url);
     $check = explode('"downloadAddr":"', $resp);
@@ -141,7 +145,7 @@ if (isset($_POST['url']) && !empty($_POST['url'])) {
         $cleanVideo = "https://api2-16-h2.musical.ly/aweme/v1/play/?video_id=$videoKey&vr_type=0&is_play_url=1&source=PackSourceEnum_PUBLISH&media_type=4";
         $cleanVideo = getContent($cleanVideo, true);
         if ($store_locally) {
-            $link = downloadVideo($contentURL, $file);
+            $link = downloadVideo($contentURL, $file_name);
             if ($link) {
                 echo json_encode([
                     "success" => true,

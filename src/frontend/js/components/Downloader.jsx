@@ -3,7 +3,6 @@ import { DownloadIcon, RefreshIcon } from '@heroicons/react/outline';
 import axios from 'axios';
 import { bind } from 'lodash';
 import { ajaxurl,youtube } from '../components/Backend';
-
 class Downloader extends Component {
 
     constructor(props) {
@@ -33,6 +32,7 @@ class Downloader extends Component {
         if(self.state.featch.includes("tiktok.com")){
             axios.post(ajaxurl, {
                 url: self.state?.featch,
+                type: awesomecoderDownloadType ? awesomecoderDownloadType : "mp4"
             },{
                 headers: { "Content-Type": "multipart/form-data" },
             })
