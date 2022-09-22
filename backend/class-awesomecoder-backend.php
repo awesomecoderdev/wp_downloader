@@ -186,6 +186,9 @@ class Awesomecoder_Backend
 			"url" 		=> get_bloginfo('url'),
 			"ajaxurl"	=> site_url("/tiktok.php"),
 			"youtube"	=> admin_url("admin-ajax.php?action=awesomecoder_backend"),
+			"hook"	=> !in_array($hook, [
+				"post.php"
+			]) ? 1 : 0,
 			"metabox" => [
 				"fields" => [
 					[
@@ -278,7 +281,7 @@ class Awesomecoder_Backend
 
 		// metabox css
 		if (in_array($hook, $this->metabox)) {
-			wp_enqueue_script("{$this->plugin_name}-metabox", AWESOMECODER_AC_DOWNLOADER_URL . 'backend/js/metabox.js', array('jquery'), (filemtime(AWESOMECODER_AC_DOWNLOADER_PATH . "backend/js/metabox.js") ?? $this->version), true);
+			// wp_enqueue_script("{$this->plugin_name}-metabox", AWESOMECODER_AC_DOWNLOADER_URL . 'backend/js/metabox.js', array('jquery'), (filemtime(AWESOMECODER_AC_DOWNLOADER_PATH . "backend/js/metabox.js") ?? $this->version), true);
 		}
 	}
 }
